@@ -1,51 +1,54 @@
 package ru.itis.darzam.test_example.service;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import ru.itis.darzam.test_example.model.Card;
 import ru.itis.darzam.test_example.model.User;
 
-public class UntitledTestCase {
-
-  private TrelloService trelloService;
+public class UntitledTestCase extends AbstractTest{
 
   private static final String USERNAME = "daniszamaliev@gmail.com";
   private static final String PASSWORD = "dREAM1cACAO";
 
-  private static final String CARD_NAME = "Card Name";
-
-  @Before
-  public void setUp() throws Exception {
-    trelloService = new TrelloService("/Applications/Firefox.app/Contents/MacOS/firefox");
-  }
+  private static final String CARD_NAME = "Card Name 1";
+  private static final String NEW_CARD_NAME = "New card name 10";
 
   @Test
-  public void testLoginLogout() throws Exception {
-    trelloService.openHomePage();
-    trelloService.login(User.builder()
+  public void testLoginLogout() {
+    AppManager appManager = AppManager.getInstance();
+    appManager.getNavigationHelper().openHomePage();
+    appManager.getLoginHelper().login(User.builder()
             .username(USERNAME)
             .password(PASSWORD)
             .build()
     );
-    trelloService.logout();
+    appManager.getLoginHelper().logout();
   }
 
   @Test
   public void createCard() {
-    trelloService.openHomePage();
-    trelloService.login(User.builder()
+    AppManager appManager = AppManager.getInstance();
+    appManager.getNavigationHelper().openHomePage();
+    appManager.getLoginHelper().login(User.builder()
             .username(USERNAME)
             .password(PASSWORD)
             .build());
-    trelloService.createCard(Card.builder()
+    appManager.getCardHelper().createCard(Card.builder()
             .cardName(CARD_NAME)
             .build());
-    trelloService.logout();
+    appManager.getLoginHelper().logout();
   }
 
-  @After
-  public void tearDown() throws Exception {
-    trelloService.destroy();
+  @Test
+  public void editCard(){
+    AppManager appManager = AppManager.getInstance();
+    appManager.getNavigationHelper().openHomePage();
+    appManager.getLoginHelper().login(User.builder()
+            .username(USERNAME)
+            .password(PASSWORD)
+            .build());
+    appManager.getCardHelper().editaCard(Card.builder()
+            .cardName(NEW_CARD_NAME)
+            .build());
+    appManager.getLoginHelper().logout();
   }
 }
