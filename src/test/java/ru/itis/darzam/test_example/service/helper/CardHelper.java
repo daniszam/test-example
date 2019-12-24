@@ -1,4 +1,4 @@
-package ru.itis.darzam.test_example.helper;
+package ru.itis.darzam.test_example.service.helper;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;

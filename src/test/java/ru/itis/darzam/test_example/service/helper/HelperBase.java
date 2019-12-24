@@ -1,4 +1,4 @@
-package ru.itis.darzam.test_example.helper;
+package ru.itis.darzam.test_example.service.helper;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.WebDriver;

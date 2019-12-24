@@ -6,9 +6,9 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import ru.itis.darzam.test_example.helper.CardHelper;
-import ru.itis.darzam.test_example.helper.LoginHelper;
-import ru.itis.darzam.test_example.helper.NavigationHelper;
+import ru.itis.darzam.test_example.service.helper.CardHelper;
+import ru.itis.darzam.test_example.service.helper.LoginHelper;
+import ru.itis.darzam.test_example.service.helper.NavigationHelper;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -25,9 +25,9 @@ public class AppManager {
   private WebDriver driver;
 
   private AppManager (){
-    String browserPath = "/Applications/Firefox.app/Contents/MacOS/firefox";
+    Settings settings = (Settings) Generator.readFromXml(Settings.class, "../settings/Settings.xml");
 
-    Path path = Paths.get(browserPath);
+    Path path = Paths.get(Settings.browserPath);
 
     File pathBinary = new File(path.toUri());
     FirefoxBinary firefoxBinary = new FirefoxBinary(pathBinary);
